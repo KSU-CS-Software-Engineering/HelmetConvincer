@@ -2,6 +2,9 @@
 using System.Collections;
 using UnityEngine.VR;
 using UnityEngine.UI;
+using System.Threading;
+using System.IO.Ports;
+using System.IO;
 
 public class WorldController : MonoBehaviour
 {
@@ -45,13 +48,15 @@ public class WorldController : MonoBehaviour
     public Vector3[] MapArray;
 
     public LayerMask playerLayer = (1 << 8);
-
-
+	
+	SerialPort myPort; 
+	
     /// <summary>Start is a method called at the scene's start.</summary>
     void Start()
     {
         //animator = person.GetComponent<Animator>();
-
+		myPort = new SerialPort("COM5", 9600);
+		myPort.Open();
         Respawn();
     }
     void Respawn()
@@ -79,6 +84,10 @@ public class WorldController : MonoBehaviour
         // Gets the value of the control axes
         float turningMovement = Input.GetAxis("Horizontal");
         float forwardMovement = Input.GetAxis("Vertical");
+		
+		String arduino = myPort.readStringUntil('\n');
+		
+		
         if (VRSettings.enabled)
         {
             Vector2 touchPosition = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad);
@@ -110,7 +119,9 @@ public class WorldController : MonoBehaviour
 
         damageText.text = "DAMAGE: " + damageTracker;
         damageText2.text = "DAMAGE: " + damageTracker;
-        speedText.text = "SPEED: " + 30 * (transform.position - lastPosition).magnitude;
+		speedText.text = "SPEED: " + arduino;
+		myPort.write(activeCam);
+        //speedText.text = "SPEED: " + 30 * (transform.position - lastPosition).magnitude;
         lastPosition = transform.position;
     }
 
