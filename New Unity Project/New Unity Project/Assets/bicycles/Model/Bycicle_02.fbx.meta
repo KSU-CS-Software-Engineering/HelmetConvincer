@@ -1,0 +1,122 @@
+fileFormatVersion: 2
+guid: 8d9dc2e7ae7a2784ab9d721b1d43bc18
+timeCreated: 1461694719
+licenseType: Store
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Back_Wheel
+    100002: bk_handle
+    100004: bk_susp_child
+    100006: bk_susp_pare
+    100008: bk_suspention
+    100010: bk_wheel
+    100012: bk_wheel0
+    100014: body1
+    100016: //RootNode
+    100018: Cycle
+    100020: Cycle_2
+    100022: Cycle_2_Mesh
+    100024: Cycle_body
+    100026: Frnt_Wheel
+    100028: FT_wheel_Ball
+    100030: ft_wheel_suspention
+    100032: handle
+    100034: joint2
+    100036: joint3
+    100038: pedal_J
+    100040: Peddle
+    100042: Root_J
+    400000: Back_Wheel
+    400002: bk_handle
+    400004: bk_susp_child
+    400006: bk_susp_pare
+    400008: bk_suspention
+    400010: bk_wheel
+    400012: bk_wheel0
+    400014: body1
+    400016: //RootNode
+    400018: Cycle
+    400020: Cycle_2
+    400022: Cycle_2_Mesh
+    400024: Cycle_body
+    400026: Frnt_Wheel
+    400028: FT_wheel_Ball
+    400030: ft_wheel_suspention
+    400032: handle
+    400034: joint2
+    400036: joint3
+    400038: pedal_J
+    400040: Peddle
+    400042: Root_J
+    4300000: Peddle
+    4300002: Cycle_body
+    4300004: Back_Wheel
+    4300006: Frnt_Wheel
+    9500000: //RootNode
+    13700000: Back_Wheel
+    13700002: Cycle_body
+    13700004: Frnt_Wheel
+    13700006: Peddle
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 10
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
