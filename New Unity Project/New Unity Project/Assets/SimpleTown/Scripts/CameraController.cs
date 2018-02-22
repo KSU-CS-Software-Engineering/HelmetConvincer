@@ -56,8 +56,8 @@ public class CameraController : MonoBehaviour
         //If V is pressed, toggle VRSettings.enabled
         if (Input.GetKeyDown(KeyCode.V))
         {
-            VRSettings.enabled = !VRSettings.enabled;
-            Debug.Log("Changed VRSettings.enabled to:" + VRSettings.enabled);
+            UnityEngine.XR.XRSettings.enabled = !UnityEngine.XR.XRSettings.enabled;
+            Debug.Log("Changed VRSettings.enabled to:" + UnityEngine.XR.XRSettings.enabled);
         }
         // Computes rotation
         if (lookAt)
@@ -65,11 +65,11 @@ public class CameraController : MonoBehaviour
             transform.LookAt(target);
         }
         //Look around using VR Device
-        else if(VRSettings.enabled)
+        else if(UnityEngine.XR.XRSettings.enabled)
         {
-            float VRx = InputTracking.GetLocalRotation(VRNode.Head).eulerAngles.x;
-            float VRy = InputTracking.GetLocalRotation(VRNode.Head).eulerAngles.y;
-            float VRz = InputTracking.GetLocalRotation(VRNode.Head).eulerAngles.z;
+            float VRx = UnityEngine.XR.InputTracking.GetLocalRotation(UnityEngine.XR.XRNode.Head).eulerAngles.x;
+            float VRy = UnityEngine.XR.InputTracking.GetLocalRotation(UnityEngine.XR.XRNode.Head).eulerAngles.y;
+            float VRz = UnityEngine.XR.InputTracking.GetLocalRotation(UnityEngine.XR.XRNode.Head).eulerAngles.z;
             transform.Rotate(Vector3.right, VRx);
             transform.Rotate(Vector3.up, VRy);
             transform.Rotate(Vector3.forward, VRz);
