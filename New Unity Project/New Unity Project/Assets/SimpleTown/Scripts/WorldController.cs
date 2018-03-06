@@ -229,10 +229,13 @@ public class WorldController : MonoBehaviour
     /// <summary>OnCollisionEnter is a method called when the helmet collides with another rigidbody.</summary>
     void OnCollisionEnter(Collision col)
     {
+        float hardness = 1;
+        if(col.gameObject.name.Contains("grass") || col.gameObject.name.Contains("road")){
+            hardness = 10;
+        }
         /// Add damage during collision instance to damageTracker
-        damageTracker += 60 * (transform.position - lastPosition).magnitude;
-        print("Found an object - distance: " + damageTracker);
-        if (damageTracker > 25)
+        damageTracker += 100 * (transform.position - lastPosition).magnitude * Time.deltaTime * hardness;
+        if (damageTracker > 1)
             StartCoroutine(deathTrigger());
     }
 

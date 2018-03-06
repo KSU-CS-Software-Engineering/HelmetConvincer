@@ -328,6 +328,7 @@
     <None Include="Assets\OvrAvatar\LICENSE.txt" />
     <None Include="Assets\OvrAvatar\Samples\SocialStarter\README.txt" />
     <None Include="Assets\OvrAvatar\THIRD_PARTY_NOTICES.txt" />
+    <None Include="Assets\Simple Animals\readme.txt" />
     <None Include="Assets\SimplePeople\Changelog.txt" />
     <None Include="Assets\SimpleSky\ReadMe.txt" />
   </ItemGroup>

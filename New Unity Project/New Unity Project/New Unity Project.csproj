@@ -404,9 +404,11 @@
     <Compile Include="Assets\OvrAvatar\Scripts\OvrAvatarSkinnedMeshRenderComponent.cs" />
     <Compile Include="Assets\OvrAvatar\Scripts\OvrAvatarSkinnedMeshRenderPBSComponent.cs" />
     <Compile Include="Assets\OvrAvatar\Scripts\OvrAvatarTouchController.cs" />
+    <Compile Include="Assets\SimpleTown\Scripts\AnimalController.cs" />
     <Compile Include="Assets\SimpleTown\Scripts\CameraController.cs" />
     <Compile Include="Assets\SimpleTown\Scripts\HelmetController.cs" />
     <Compile Include="Assets\SimpleTown\Scripts\RiderController.cs" />
+    <Compile Include="Assets\SimpleTown\Scripts\TreeController.cs" />
     <Compile Include="Assets\SimpleTown\Scripts\UserController.cs" />
     <Compile Include="Assets\SimpleTown\Scripts\WorldController.cs" />
   </ItemGroup>
@@ -439,6 +441,7 @@
     <None Include="Assets\OvrAvatar\LICENSE.txt" />
     <None Include="Assets\OvrAvatar\Samples\SocialStarter\README.txt" />
     <None Include="Assets\OvrAvatar\THIRD_PARTY_NOTICES.txt" />
+    <None Include="Assets\Simple Animals\readme.txt" />
     <None Include="Assets\SimplePeople\Changelog.txt" />
     <None Include="Assets\SimpleSky\ReadMe.txt" />
   </ItemGroup>
