@@ -311,7 +311,7 @@ public class WorldController : MonoBehaviour
             {
                 Vector2 touchPosition = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad);
                 turningMovement = touchPosition.x;
-                forwardMovement = touchPosition.y;
+                forwardMovement = touchPosition.y/4;
             }
             else
             {
