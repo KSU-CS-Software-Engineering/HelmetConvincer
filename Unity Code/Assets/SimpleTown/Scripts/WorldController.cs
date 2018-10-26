@@ -119,17 +119,19 @@ public class WorldController : MonoBehaviour
     /// <summary>Respawn is a method called at the player's respawn.</summary>
     void Respawn()
     {
+        mapArray = new Vector3[4];
+        mapArray[0] = new Vector3(-630, 0, 451);
+        mapArray[1] = new Vector3(-469, 0, -171);
+        mapArray[2] = new Vector3(9, 0, -305);
+        mapArray[3] = new Vector3(193, 0, 421);
         /// Set the player's new position
         user.transform.localEulerAngles = new Vector3(0, 0, 0);
         user.transform.Translate(0, 0.1f, 0);
         person.position = user.transform.position + new Vector3(0, 0.5f, -0.3f);
 
         /// Select the map
-        int mapSelection = Random.Range(0, 3);
-        map++;
-        if (map > 3)
-            map = 0;
-        user.transform.position = mapArray[(4 * map) + mapSelection];
+        int mapSelection = Random.Range(0, 4);
+        user.transform.position = mapArray[mapSelection];
 
         /// Reset values for reset
         damageTracker = 0;
@@ -313,7 +315,7 @@ public class WorldController : MonoBehaviour
             }
             else
             {
-                forwardMovement = Input.GetAxis("Vertical");
+                forwardMovement = Input.GetAxis("Vertical")/4;
                 turningMovement = Input.GetAxis("Horizontal");
             }
         }
