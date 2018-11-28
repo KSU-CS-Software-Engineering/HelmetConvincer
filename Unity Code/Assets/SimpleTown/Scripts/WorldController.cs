@@ -100,18 +100,18 @@ public class WorldController : MonoBehaviour
     void Start()
     {
         //animator = person.GetComponent<Animator>();
-        
+
         string[] portNames = System.IO.Ports.SerialPort.GetPortNames();
         string ports = "";
         for (int i = 0; i < portNames.Length; i++)
         {
             ports += portNames[i];
-                myPort = new SerialPort(portNames[i], 9600);
-                myPort.ReadTimeout = 250;
-                myPort.Close();
-                myPort.Open();
+            myPort = new SerialPort(portNames[i], 9600);
+            myPort.ReadTimeout = 250;
+            myPort.Close();
+            myPort.Open();
         }
-        speedText.text = "SPEED: " + ports;
+        speedText.text = "TIME: " + ports;
 
         Respawn();
     }
@@ -151,44 +151,6 @@ public class WorldController : MonoBehaviour
     /// <summary>FixedUpdate is a method called at the during the scenes fixed update, used for movement calculations.</summary>
     void FixedUpdate()
     {
-        /// Gets the value of the control axes
-        //float turningMovement = Input.GetAxis("Horizontal");
-        //float forwardMovement = Input.GetAxis("Vertical");
-
-        /*string arduino = "NOPE";
-        try
-        {
-            if (myPort.IsOpen)
-            {
-                myPort.WriteLine(activeCam.ToString());
-                myPort.BaseStream.Flush();
-                arduino = myPort.ReadLine();
-            }
-        }
-        catch (System.Exception e)
-        {
-            arduino = e.Message;
-        }
-        if (false)
-        {
-
-        }
-        else{
-            /// Modifies the player movement based on source
-            if (UnityEngine.XR.XRSettings.enabled)
-            {
-                Vector2 touchPosition = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad);
-                turningMovement = touchPosition.x;
-                forwardMovement = touchPosition.y;
-            }
-            if (activeCam == 1)
-            {
-                turningMovement = 0;
-                forwardMovement = 0;
-            }
-        }
-
-        /// Modify the player's postion based on inputs and speed		
         user.transform.Rotate(Vector3.up, turningMovement * turnSpeed * Time.deltaTime);
         RaycastHit hit;
         if (Physics.Raycast(user.transform.position + Vector3.up, -Vector3.up, out hit, playerLayer))
@@ -197,51 +159,21 @@ public class WorldController : MonoBehaviour
                 hit.distance = 1;
             user.transform.Translate(0, 0, forwardMovement * (moveSpeed / hit.distance) * Time.deltaTime);
         }
-
-        
-        string[] arduinoValues = arduino.Split(' ');
-        if (arduinoValues.Length == 2)
-        {
-            turningMovement = System.Convert.ToSingle(arduinoValues[1]);
-            turningMovement -= 450;
-            turningMovement = turningMovement / 450;
-            
-            forwardMovement = System.Convert.ToSingle(arduinoValues[0]);
-            if (forwardMovement > 3)
-            {
-                forwardMovement = 0;
-            }
-            else
-            {
-                forwardMovement = 1;
-            }
-        }*/
-
-
-
-        user.transform.Rotate(Vector3.up, turningMovement * turnSpeed * Time.deltaTime);
-        RaycastHit hit;
-        if (Physics.Raycast(user.transform.position + Vector3.up, -Vector3.up, out hit, playerLayer))
-        {
-            if (hit.distance < 1)
-                hit.distance = 1;
-            user.transform.Translate(0, 0, forwardMovement * (moveSpeed / hit.distance) * Time.deltaTime);
-        }
-        //
-        if(((Time.time - time) > 90) && (activeCam == 0))
+        // After 90 seconds the session ends.
+        if (((Time.time - time) > 90) && (activeCam == 0))
         {
             StartCoroutine(deathTrigger());
         }
 
 
         /// Actions performed when the reset button is pressed
-            if (Input.GetKeyDown("space") || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
+        if (Input.GetKeyDown("space") || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
         {
             Respawn();
         }
 
         /// Update varaibles needed between loops
-        damageText.text = "DAMAGE: " + damageTracker.ToString("F2");
+        damageText.text = "";
         speedText.text = "TIME: " + (90 - (Time.time - time)).ToString("F2");
         lastPosition = transform.position;
     }
@@ -311,11 +243,11 @@ public class WorldController : MonoBehaviour
             {
                 Vector2 touchPosition = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad);
                 turningMovement = touchPosition.x;
-                forwardMovement = touchPosition.y/4;
+                forwardMovement = touchPosition.y / 4;
             }
             else
             {
-                forwardMovement = Input.GetAxis("Vertical")/4;
+                forwardMovement = Input.GetAxis("Vertical") / 5;
                 turningMovement = Input.GetAxis("Horizontal");
             }
         }
@@ -326,7 +258,7 @@ public class WorldController : MonoBehaviour
             turningMovement = 0;
         }
 
-        
+
 
 
         /// UPDATE VR DEVICE INPUTS
@@ -364,18 +296,25 @@ public class WorldController : MonoBehaviour
     /// <summary>OnCollisionEnter is a method called when the helmet collides with another rigidbody.</summary>
     void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.name.Contains("grass") || col.gameObject.name.Contains("road") || col.gameObject.name.Contains("animal"))
+        //if (col.gameObject.name.Contains("grass") || col.gameObject.name.Contains("road") || col.gameObject.name.Contains("animal"))
+        //{
+        //}
+        ///// Add damage during collision instance to damageTracker
+        //damageTracker = 100 * (transform.position - lastPosition).magnitude * Time.deltaTime;
+        //if (damageTracker >= 1)
+        //{
+        //    StartCoroutine(deathTrigger());
+        //}
+        if (col.Equals("Back_Wheel1"))
         {
-            damageTracker += 1;
+            deathScreen.color = new Color(0, 0, 0, 25);
         }
-        /// Add damage during collision instance to damageTracker
-        damageTracker += 100 * (transform.position - lastPosition).magnitude * Time.deltaTime;
-        if (damageTracker > 1)
+        if (col.Equals("Back_Wheel"))
         {
-            StartCoroutine(deathTrigger());
+            deathScreen.color = new Color(0, 0, 0, 50);
         }
+        StartCoroutine(deathTrigger());
     }
-
     /// <summary>DeathTrigger is a method called whenever damage passes the death threshold.</summary>
     IEnumerator deathTrigger()
     {
@@ -386,18 +325,15 @@ public class WorldController : MonoBehaviour
         cameras[1].gameObject.SetActive(true);
 
         /// Black out after 5 seconds if still on deathCam
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1);
         if (activeCam == 1)
         {
             deathScreen.color = new Color(0, 0, 0, 100);
-            damageImage.rectTransform.sizeDelta = new Vector2(100, 100*damageTracker);
-            int newColor = (int)(340 - (damageTracker * 85));
-            damageImage.color = new Color(255, newColor, 0, 100);            
         }
     }
     void OnApplicationQuit()
     {
-        if(myPort.IsOpen)
+        if (myPort.IsOpen)
             myPort.Close();
     }
 }
