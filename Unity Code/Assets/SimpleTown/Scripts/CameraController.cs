@@ -2,37 +2,47 @@
 using System.Collections;
 using UnityEngine.VR;
 
-/// <summary>Controls how a given camera is orientated</summary>
+/// <summary>
+/// Controls the way that a camera is positioned during runtime.
+/// </summary>
 public class CameraController : MonoBehaviour
 {
+    /// <summary>
+    /// The target represents the way that a camera should be positioned.
+    /// </summary>
     [SerializeField]
     private Transform target;
-	/// <summary>The target property represents the camera's target for orientation.</summary>
-    /// <value>The target property represents the value of the target object.</value>
-	
+
+    /// <summary>
+    /// offsetPosition represents the offset position of the camera.
+    /// </summary>
     [SerializeField]
     private Vector3 offsetPosition;
-	/// <summary>The offsetPosition property represents the camera's offest position.</summary>
-    /// <value>The offsetPosition property represents the camera's offest position in relation to the target.</value>
-	
+
+    /// <summary>
+    /// offsetPositionSpace represents the starting position of a camera.
+    /// </summary>
     [SerializeField]
     private Space offsetPositionSpace = Space.Self;
-	/// <summary>The offsetPositionSpace property represents the camera's starting position.</summary>
-    /// <value>The offsetPositionSpace property represents the camera's starting position in relation to the target.</value>
-	
+
+    /// <summary>
+    /// lookAt property determines whether the camera should follow the target or follow the target's orientation.
+    /// </summary>
     [SerializeField]
     public bool lookAt;
-	/// <summary>The lookAt property tells how the camera should focus.</summary>
-    /// <value>The lookAt property determines if the camera looks at the target or follows its orientation.</value>
-	
-	
-	/// <summary>Update is a method called when the scene updates.</summary>
+
+
+    /// <summary>
+    /// Update calls whenever the scene changes and reorients the camera accordingly.
+    /// </summary>
     private void Update()
     {
         Refresh();
     }
 
-	/// <summary>Refresh is a method called to refresh variable values.</summary>
+    /// <summary>
+    /// Refresh reorients the camera whenever a change in position needs to be made.
+    /// </summary>
     public void Refresh()
     {
         if (target == null)
@@ -65,7 +75,7 @@ public class CameraController : MonoBehaviour
             transform.LookAt(target);
         }
         //Look around using VR Device
-        else if(UnityEngine.XR.XRSettings.enabled)
+        else if (UnityEngine.XR.XRSettings.enabled)
         {
             float VRx = UnityEngine.XR.InputTracking.GetLocalRotation(UnityEngine.XR.XRNode.Head).eulerAngles.x;
             float VRy = UnityEngine.XR.InputTracking.GetLocalRotation(UnityEngine.XR.XRNode.Head).eulerAngles.y;
@@ -80,7 +90,7 @@ public class CameraController : MonoBehaviour
             //float moveHorizontal = Input.GetAxis("Horizontal");
             //transform.Rotate(Vector3.up, moveHorizontal * 40 * Time.deltaTime);
 
-			///Rotate based on mouse movement
+            ///Rotate based on mouse movement
             float mouseHorizontal = Input.GetAxis("Mouse X");
             float mouseVertical = Input.GetAxis("Mouse Y");
             transform.Rotate(Vector3.up, mouseHorizontal);

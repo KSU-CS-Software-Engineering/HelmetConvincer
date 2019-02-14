@@ -4,27 +4,48 @@ using UnityEngine;
 
 public class AnimalController : MonoBehaviour
 {
-
+    /// <summary>
+    /// start represents the starting position for an animal.
+    /// </summary>
     Vector3 start;
 
+    /// <summary>
+    /// player represents where the player is in relation to an animal.
+    /// </summary>
     Transform player;
 
+    /// <summary>
+    /// flying determines whether or not an animal is flying (applies to bird animals).
+    /// </summary>
     public bool flying;
 
+    /// <summary>
+    /// speed determines the speed at which an animal should move.
+    /// </summary>
     public int speed;
 
+    /// <summary>
+    /// chase determines whether or not an animal should begin moving towards the player.
+    /// </summary>
     bool chase = false;
 
+    /// <summary>
+    /// Time represents the current amount of time in the game.
+    /// </summary>
     float time;
 
-    // Use this for initialization
+    /// <summary>
+    /// Start is called at the beginning of the scene and determines the position for an animal.
+    /// </summary>
     void Start()
     {
         start = transform.position;
         time = Time.time;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// FixedUpdate is called once per frame and determines whether or not an animal should be moving towards the player.
+    /// </summary>
     void FixedUpdate()
     {
         //When chase is true the animal will chase the person.
@@ -36,14 +57,17 @@ public class AnimalController : MonoBehaviour
         }
     }
 
-    //Method used from the World Controller class to tell animals to stop chasing the person
-    //when the person is injured or the time runs out.
+    /// <summary>
+    /// Halt is implemented within the WorldController and causes animals to halt when they are not in range of the player.
+    /// </summary>
     void Halt()
     {
         chase = false;
     }
 
-    //Method used to Initialize the animals at the begining of a round.
+    /// <summary>
+    /// Respawn initializes animals at the beginning of a round.
+    /// </summary>
     void Respawn()
     {
         transform.position = start;
@@ -51,8 +75,10 @@ public class AnimalController : MonoBehaviour
         time = Time.time;
     }
 
-    //Method called when a person enters a certain radius around the animal 
-    //and tells the animal to chase them out of it
+    /// <summary>
+    /// OnTriggerEnter is called whenever the player enters a radus of the animal
+    /// </summary>
+    /// <param name="other">Represents the player entering the radius of the animal.</param>
     private void OnTriggerEnter(Collider other)
     {
         string target = "Bycicle_02_Col_03";
@@ -66,7 +92,10 @@ public class AnimalController : MonoBehaviour
         }
     }
 
-    //Method called when a person leaves the radius of chasing to tell the animal to stop
+    /// <summary>
+    /// OnTriggerExit is called whenever the player exits the radius of the animal and causes the animal to stop moving.
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.name.Equals("Bycicle_02_Col_03"))

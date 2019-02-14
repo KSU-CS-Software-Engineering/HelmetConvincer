@@ -8,95 +8,143 @@ using System.IO;
 
 public class WorldController : MonoBehaviour
 {
+    /// <summary>
+    /// The head property represents the player's head object.
+    /// </summary>
     [SerializeField]
     private Transform head;
-    /// <summary>The head property represents the player's head.</summary>
-    /// <value>The head transformation represents the player's head object.</value>
 
+    /// <summary>
+    /// The person property represents the player's person object. 
+    /// </summary>
     [SerializeField]
     public Transform person;
-    /// <summary>The person property represents the player's person.</summary>
-    /// <value>The person transformation represents the player's model object.</value>
 
+    /// <summary>
+    /// The user property represents the entirety of the user. 
+    /// </summary>
     [SerializeField]
     public Transform user;
-    /// <summary>The user property represents the player.</summary>
-    /// <value>The user transformation represents the player's entire object.</value>
 
+    /// <summary>
+    /// deathCameraMan represents the camera box the holds the death camera.
+    /// </summary>
     [SerializeField]
     public Transform deathCameraMan;
-    /// <summary>The deathCameraMan property represents the box holding the deathcam.</summary>
-    /// <value>The deathCameraMan transformation represents the object which holds the deathcam.</value>
 
+    /// <summary>
+    /// The animator property represents the animator that controls the players movements.
+    /// </summary>
     public Animator animator;
-    /// <summary>The animator property represents the player.</summary>
-    /// <value>The animator property represents the player's animator.</value>
 
+    /// <summary>
+    /// The damageText property represents the text displaying the amount of damage the player has taken.
+    /// </summary>
     public Text damageText;
-    /// <summary>The damageText property represents the player's damageText.</summary>
-    /// <value>The damageText property represents the damageText that will be displayed to the player.</value>
 
+    /// <summary>
+    /// The speedText property represents the text that displays the speed at which the player is moving.
+    /// </summary>
     public Text speedText;
-    /// <summary>The speedText property represents the player's speedText.</summary>
-    /// <value>The speedText property represents the speedText that will be displayed to the player.</value>
 
+    /// <summary>
+    /// The deathScreen property is the screen that will be displayed whenever the user dies
+    /// </summary>
     public Image deathScreen;
-    /// <summary>The deathScreen property represents the player's deathScreen.</summary>
-    /// <value>The deathScreen property represents the deathScreen that will be displayed upon player death.</value>
 
+    /// <summary>
+    /// The damageImage is a box that represents how much damage was taken by the user. It displays different colors depending on the amount of damage. 
+    /// </summary>
     public Image damageImage;
 
+    /// <summary>
+    /// The damageTracker property represents the amount of damage that has been dealt to the player during the runtime. 
+    /// </summary>
     float damageTracker;
-    /// <summary>The damageTracker property tracks the player's damage.</summary>
-    /// <value>The damageTracker property represents the total damage that has been dealth to the player.</value>
 
+    /// <summary>
+    /// The lastPosition vector represents the last position on the playing field where the player has been. 
+    /// </summary>
     Vector3 lastPosition = Vector3.zero;
-    /// <summary>The lastPosition property tracks the player's postition.</summary>
-    /// <value>The lastPosition property represents the lastPosition of the player object.</value>
 
+    /// <summary>
+    /// The cameras property keeps track of all of the cameras in the scene. 
+    /// </summary>
     public Camera[] cameras;
-    /// <summary>The cameras array contains all used cameras.</summary>
-    /// <value>The cameras property represents all the cameras in the scene.</value>
 
+    /// <summary>
+    /// cameraOffsetPositions represents the positioning of each camera in the game. 
+    /// </summary>
     public Vector3[] cameraOffsetPositions;
-    /// <summary>The cameraOffsetPositions array contains all used cameraOffsetPositions.</summary>
-    /// <value>The cameraOffsetPositions property represents all the cameras in the scene offest positions.</value>
 
+    /// <summary>
+    /// activeCam property keeps track of which camera is currently displaying.
+    /// </summary>
     public int activeCam;
-    /// <summary>The activeCam integer stores the active camera's array location.</summary>
-    /// <value>The activeCam property represents which camera is currently active in the scene.</value>
 
+    /// <summary>
+    /// The TurnSpeed property represents the value by which the players rotation is scaled
+    /// </summary>
     public float turnSpeed;
-    /// <summary>The TurnSpeed property determines the player's turn speed.</summary>
-    /// <value>The TurnSpeed property represents the value by which the players rotation is scaled.</value>
 
+    /// <summary>
+    /// The MoveSpeed property represents the value by which the players movement is scaled.
+    /// </summary>
     public float moveSpeed;
-    /// <summary>The MoveSpeed property determines the player's move speed.</summary>
-    /// <value>The MoveSpeed property represents the value by which the players movement is scaled.</value>
 
+    /// <summary>
+    /// The Map property represents the value by which the player's current map is determined.
+    /// </summary>
     public int map;
-    /// <summary>The Map property determines which map to use.</summary>
-    /// <value>The Map property represents the value by which the player's current map is determined.</value>
 
+    /// <summary>
+    /// The MapArray property represents each possible player starting postion.
+    /// </summary>
     public Vector3[] mapArray;
-    /// <summary>The MapArray array determines the player's starting postions.</summary>
-    /// <value>The MapArray property represents each possible player starting postion.</value>
 
+    /// <summary>
+    /// The playerLayer property takes out the player from the gravity script calculations.
+    /// </summary>
     private LayerMask playerLayer = (1 << 8);
-    /// <summary>The playerLayer layer represents all player objects.</summary>
-    /// <value>The playerLayer property takes out the player from the gravity script calculations.</value>
 
+    /// <summary>
+    /// SerialPort represents the port on which the game is currently operating
+    /// </summary>
     private SerialPort myPort = new SerialPort("", 9600);
+
+    /// <summary>
+    /// speedSize property represents the magnitude of the speed of the bike
+    /// </summary>
     private const int speedSize = 100;
+
+    /// <summary>
+    /// speeds property keeps track of various speed types, such as turning speed and the speed of forward movement
+    /// </summary>
     private float[] speeds = new float[speedSize];
 
+    /// <summary>
+    /// turningMovement property represents how quickly the bike is turning
+    /// </summary>
     private float turningMovement = 0;
+
+    /// <summary>
+    /// forwardMovement property keeps track of the magnitude of the bikes forward movement
+    /// </summary>
     private float forwardMovement = 0;
+
+    /// <summary>
+    /// Time represents the amount of time left during the game.
+    /// </summary>
     private float time = 0;
 
+    /// <summary>
+    /// animalController keeps track of the movements of animals in order to determine when they should move towards the player
+    /// </summary>
     public GameObject animalController;
 
-    /// <summary>Start is a method called at the scene's start.</summary>
+    /// <summary>
+    /// Start is called at the beginning of the scene to initialize port values and repawn the player somewhere in the scene.
+    /// </summary>
     void Start()
     {
         //animator = person.GetComponent<Animator>();
@@ -116,9 +164,12 @@ public class WorldController : MonoBehaviour
         Respawn();
     }
 
-    /// <summary>Respawn is a method called at the player's respawn.</summary>
+    /// <summary>
+    /// Respawn is called in order to have the player restart in one of the four possible locations. If called during the game, it will restart without the player dying.
+    /// </summary>
     void Respawn()
     {
+        ///Set possible locations where the player may respawn
         mapArray = new Vector3[4];
         mapArray[0] = new Vector3(-630, 0, 451);
         mapArray[1] = new Vector3(-469, 0, -171);
@@ -148,11 +199,14 @@ public class WorldController : MonoBehaviour
         time = Time.time;
     }
 
-    /// <summary>FixedUpdate is a method called at the during the scenes fixed update, used for movement calculations.</summary>
+    /// <summary>
+    /// Fixed update is called consistenly over a period of time in order to calculate the player's movement.
+    /// </summary>
     void FixedUpdate()
     {
         user.transform.Rotate(Vector3.up, turningMovement * turnSpeed * Time.deltaTime);
         RaycastHit hit;
+        ///Calculates the movement of the player if player collides with another object.
         if (Physics.Raycast(user.transform.position + Vector3.up, -Vector3.up, out hit, playerLayer))
         {
             if (hit.distance < 1)
@@ -178,10 +232,13 @@ public class WorldController : MonoBehaviour
         lastPosition = transform.position;
     }
 
-    /// <summary>Update is a method called when the scene updates, used for visual calculations.</summary>
+    /// <summary>
+    /// Update is called whenever the scene needs to update and it calculates visual aspects of the scene.
+    /// </summary>
     private void Update()
     {
         string arduino = "NOPE";
+        ///Calculates arduino input but does we will not have any functional need until arduino is acquired.
         try
         {
             if (myPort.IsOpen)
@@ -293,7 +350,11 @@ public class WorldController : MonoBehaviour
         }
     }
 
-    /// <summary>OnCollisionEnter is a method called when the helmet collides with another rigidbody.</summary>
+    /// <summary>
+    /// OnCollisionEnter is a method called when the helmet collides with another rigidbody, attempts to determine where colision is made and will then results in particular death animation
+    /// once implemented.
+    /// </summary>
+    /// <param name="col">Col is the part of the bike that collides with a rigidbody</param>
     void OnCollisionEnter(Collision col)
     {
         //if (col.gameObject.name.Contains("grass") || col.gameObject.name.Contains("road") || col.gameObject.name.Contains("animal"))
@@ -305,17 +366,22 @@ public class WorldController : MonoBehaviour
         //{
         //    StartCoroutine(deathTrigger());
         //}
+
+        ///If back wheel makes contact with rigidbody, results in death
         if (col.Equals("Back_Wheel1"))
         {
-            deathScreen.color = new Color(0, 0, 0, 25);
+            StartCoroutine(deathTrigger());
         }
         if (col.Equals("Back_Wheel"))
         {
-            deathScreen.color = new Color(0, 0, 0, 50);
+            StartCoroutine(deathTrigger());
         }
-        StartCoroutine(deathTrigger());
+        
     }
-    /// <summary>DeathTrigger is a method called whenever damage passes the death threshold.</summary>
+
+    /// <summary>
+    /// DeathTrigger is a method called whenever the player has crashed and lost the game
+    /// </summary>
     IEnumerator deathTrigger()
     {
         /// Set deathCam as active camera

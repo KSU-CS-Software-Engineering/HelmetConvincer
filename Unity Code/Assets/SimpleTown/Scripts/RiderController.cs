@@ -1,20 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-/// <summary>Determines how the rider interacts with the bike and the scene.</summary>
+/// <summary>
+/// Determines how the rider object interacts with it's bike and with the rest of the scene.
+/// </summary>
 public class RiderController : MonoBehaviour
 {
+    /// <summary>
+    /// The animator property represents the player's animator, and will determine how the player moves.
+    /// </summary>
     Animator animator;
-	/// <summary>The animator property represents the player.</summary>
-    /// <value>The animator property represents the player's animator.</value>
 	
-    /// <summary>Start is a method called at the scene's start.</summary>
+    /// <summary>
+    /// Start is called at the beginning of the scene to acquire an animator for the rider.
+    /// </summary>
     void Start()
     {
         animator = GetComponent<Animator>();
     }
 
-    /// <summary>Update is a method called when the scene updates.</summary>
+    /// <summary>
+    /// Update is called every time the scene is updated and retrieves input from the user to determine the rider's movement.
+    /// </summary>
     void Update()
     {
         float h = Input.GetAxis("Horizontal");
