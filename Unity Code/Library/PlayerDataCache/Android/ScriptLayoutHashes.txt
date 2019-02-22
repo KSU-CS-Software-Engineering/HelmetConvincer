@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-D:/Sync/College/CIS 642/HelmetConvincer/Unity Code/Builds/F18_Test2.apk
+D:/Sync/College/CIS 643/HelmetConvincer/Unity Code/Builds/S19_Test1.apk
 SceneListBegin?
 Assets/Maps/World.unity
 SceneListEnd?
@@ -25,7 +25,7 @@ c7dd12c15208b0447e101f80038706df UnityEngine.Timeline.dll:UnityEngine.Timeline.A
 64f3a13c1277a7f1324321d93d0ec13b UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 f6637497451c9a030c421de4a1ad5cdb Unity.TextMeshPro.dll:TMPro.TMP_ScrollbarEventHandler
 b5ac0551c03ebb6ff6aed13d4150ee02 Assembly-UnityScript.dll:.ThirdPersonController
-12cbf85df450bc3f393db01d5d20db51 Assembly-CSharp.dll:.HelmetController
+b96f6a3ee721396729de7951989e74f3 Assembly-CSharp.dll:.HelmetController
 8f93321b5b48b5e5b24823c2736a1020 Assembly-CSharp.dll:.OVRDebugHeadController
 b14b4630cc47b6e9ea8a644551a6a8cc Unity.TextMeshPro.dll:TMPro.TMP_Text
 1444e7ca27cf64d65520e34e7a71f058 Assembly-CSharp.dll:.OVRManager
@@ -64,6 +64,8 @@ e90403eeda069970e0b9de1533de13a6 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 2d58ca16854b99daea8c45e9c0f367b7 UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 16da51d1b62ef6d4ee1849350434023b UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 50b0b141074b216c8b53b1bd467f73c9 Unity.TextMeshPro.dll:TMPro.TMP_InputField
+486cd95c82d8305219c352c06b776e1f UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
+486cd95c82d8305219c352c06b776e1f UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
 53cefe5d98cadefbab750835e70b89c0 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 486cd95c82d8305219c352c06b776e1f UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 da2091a04d360891450faf16cdf621f1 UnityEngine.UI.dll:UnityEngine.UI.Button

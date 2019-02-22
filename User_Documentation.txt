@@ -1,0 +1,52 @@
+User Documentation
+------------------
+In this document I will describe what the project is, what the goal of the project is, and how to install and run the program.
+
+Project Description
+-------------------
+This project is a mobile VR application that simulates an open world environment in which the user rides a bicycle.
+You are both in a VR space experiencing the world you are in while riding an actual bike controlling your in-game character.
+
+Project Goal
+------------
+The goal of this project is to get the user to realize how important it is to wear a helmet while riding a bike.
+
+How to Install the Project
+--------------------------
+To install the project, you must first download the appropriate executable from the most recent release on the Github.
+The most recent release can be found at the link below:
+https://github.com/KSU-CS-Software-Engineering/HelmetConvincer/releases
+
+If on a desktop:
+1)  Download the .zip file that is tied to the release.
+2)  Navigate to wherever the file has downloaded too.
+3)  Extract the downloaded zip file to whereever you would like.
+4)  Navigate to where you just extracted the zip archive.
+3)  Double-click the .exe file inside the folder and enjoy the game.
+
+If on Android:
+1)  Download the .apk file that is tied to the release.
+2)  Transfer it to the Android device of your choosing.
+3)  On the Android device, use your file manager to navigate to where you put the .apk.
+4)  Make sure your phone has sideloading apps enabled and open the .apk file. Your phone will ask you if you want to install the app, click yes.
+5)  The app should now appear in your app drawer, run it, insert your device into your GearVR, and enjoy the game.
+
+If you have the physical bike with you (Not working yet):
+1)  Make sure the Arduino is plugged in and turned on.
+2)  Make sure the Arduino is connected to your Android device.
+3)  Follow the steps to run the app on your Android device and enjoy, the bike's inputs will automatically control the game.
+
+If you wish to modify the game itself:
+1)  Go and download Unity 2018.2.20f1 from the link below or through the Unity Hub, which you can download from the second link.
+    Unity 2018.2.20f1: https://unity3d.com/get-unity/download/archive
+    Unity Hub: https://unity3d.com/get-unity/download
+2)  Once installed, clone the repository by downloading the zipped repository, available at the link below.
+    Zipped Repository:https://github.com/KSU-CS-Software-Engineering/HelmetConvincer
+3)  Unpack the archived repository to whereever you choose.
+4)  Open Unity 2018.2.20f1 and click "Open" in the upper left corner and navigate into the "Unity Code" folder in the unpacked repository folder and click "Select Folder" in the bottom right.
+5)  Unity will then load all the scripts, meshes, and other resources it requires before opening the project for you to edit.
+6)  Edit to your heart's content and when you want to test your changes, click the "Play" button in the top middle toolbar to start playing the game.
+7)  If you wish to export you editted game, go to File->Build Settings.
+8)  In the window that opens, pick your platform, edit the build options, then click "Build."
+9)  You will asked where to save the build, then Unity will compile the build and open the containing folder when it is done.
+10) You can now follow the above steps to play your game on both a Windows computer and an Android device of your choosing.
