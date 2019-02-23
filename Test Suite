@@ -1,0 +1,45 @@
+Test Suite
+------------------
+In this document give walkthroughs on how to test the Helmet Convincer program.
+
+Project Description
+-------------------
+This project is a mobile VR application that simulates an open world environment in which the user rides a bicycle.
+You are both in a VR space experiencing the world you are in while riding an actual bike controlling your in-game character.
+
+Project Goal
+------------
+The goal of this project is to get the user to realize how important it is to wear a helmet while riding a bike.
+
+How to Test the Project
+--------------------------
+
+Once the program is installed and running the testing begins.
+
+    Crash Testing
+    ---------------
+1. Check input device (keyboard, remote, bike) to ensure the program is reacting to input.
+2. Drive the bike into a wall at slow speed to see if the injury screen is initiated and accurate based on a given range of average injurys.
+3. Drive the bike into a wall at a fast speed to see if the injury screen is initiated and accurate.
+4. Drive the bike into a wall at medium speed to see if the injury screen is initated and accurate.
+5. Drive the bike directly into a wall to see if the annimation is initiated and accurate.
+6. Drive the bike into a wall from the left to see if the annimation is initiated and accurate.
+7. Drive the bike into a wall from the right to see if the annimation is initated and accurate.
+
+    Stability Testing
+    -------------------
+1. Drive the bike down the road at various speeds and examine the stability.
+2. Drive the bike up and down a curb at various speeds and examine the stability.
+3. Drive the bike up and down a steep incline at various speeds and examine the stability.
+
+    Game Mechanics Testing
+    ------------------------
+1. Wait 90 seconds to see if the game is automaticly ended.
+2. Ride the bike until an animal is found and examine if it chases you and enables the injury screen upon impact.
+3. Examine if the animal behavior is realistic.
+4. Ride the bike until water is found and examine if the injury screen is initated with collison.
+
+     Map Testing
+     -------------
+1. Ride the bike around the map and look for glitches.
+2. Do unexpected things and examine for unexplainable results.
