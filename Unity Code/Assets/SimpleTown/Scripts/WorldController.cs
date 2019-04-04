@@ -132,7 +132,7 @@ public class WorldController : MonoBehaviour
     /// <summary>
     /// SerialPort represents the port on which the game is currently operating
     /// </summary>
-    private SerialPort myPort = new SerialPort("", 9600);
+    private SerialPort myPort = new SerialPort("", 115200);
 
     /// <summary>
     /// speedSize property represents the magnitude of the speed of the bike
@@ -173,14 +173,18 @@ public class WorldController : MonoBehaviour
 
         string[] portNames = System.IO.Ports.SerialPort.GetPortNames();
         string ports = "";
-        for (int i = 0; i < portNames.Length; i++)
+
+        foreach(string portName in portNames)
         {
-            ports += portNames[i];
-            myPort = new SerialPort(portNames[i], 9600);
-            myPort.ReadTimeout = 250;
-            myPort.Close();
-            myPort.Open();
+            myPort = new SerialPort(portName, 115200);
+            if (myPort.IsOpen)
+            {
+                myPort.ReadTimeout = 250;
+                myPort.Open();
+                break;
+            }
         }
+
         speedText.text = "TIME: " + ports;
 
         Respawn();
@@ -232,7 +236,10 @@ public class WorldController : MonoBehaviour
         if (Physics.Raycast(user.transform.position + Vector3.up, -Vector3.up, out hit, playerLayer))
         {
             if (hit.distance < 1)
+            {
                 hit.distance = 1;
+            }
+
             user.transform.Translate(0, 0, forwardMovement * (moveSpeed / hit.distance) * Time.deltaTime);
         }
         // After 90 seconds the session ends.
@@ -259,29 +266,26 @@ public class WorldController : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        string arduino = "NOPE";
+        string serialIn = "NOPE";
         ///Calculates arduino input but does we will not have any functional need until arduino is acquired.
         try
         {
             if (myPort.IsOpen)
             {
-                myPort.WriteLine(activeCam.ToString());
-                myPort.BaseStream.Flush();
-                arduino = myPort.ReadLine();
+                serialIn = myPort.ReadLine();
             }
         }
         catch (System.Exception e)
         {
-            arduino = e.Message;
+            serialIn = e.Message;
         }
 
 
-        string[] arduinoValues = arduino.Split(' ');
-        if (arduinoValues.Length == 2)
+        string[] serialValues = serialIn.Split(',');
+        if (serialValues.Length == 2)
         {
-
-            turningMovement = System.Convert.ToSingle(arduinoValues[1]);
-            forwardMovement = System.Convert.ToSingle(arduinoValues[0]);
+            turningMovement = System.Convert.ToSingle(serialValues[1]);
+            forwardMovement = System.Convert.ToSingle(serialValues[0]);
 
             if (turningMovement < 10)
             {

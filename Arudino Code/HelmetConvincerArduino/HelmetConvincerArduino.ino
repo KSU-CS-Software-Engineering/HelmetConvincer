@@ -8,7 +8,7 @@
  unsigned int turnReading;
  
 void setup() {
- Serial.begin(9600);
+ Serial.begin(115200);
  timer = millis();
  lastReading = 0;
  nowReading = 0;
