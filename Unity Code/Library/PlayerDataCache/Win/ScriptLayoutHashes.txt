@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-D:/Sync/College/CIS 643/HelmetConvincer/Unity Code/Builds/Desktop Program/HelmetConvincer.exe
+D:/Sync/College/CIS 643/HelmetConvincer/Unity Code/Builds/HelmetConvincer.exe
 SceneListBegin?
 Assets/Maps/World.unity
 SceneListEnd?
