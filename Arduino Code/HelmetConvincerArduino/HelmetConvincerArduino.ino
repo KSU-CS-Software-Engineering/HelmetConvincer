@@ -1,4 +1,5 @@
-//#include <SoftwareSerial.h>
+#include <SoftwareSerial.h>
+
  int speedPin = A0;
  int turnPin = A1;
  bool running = true;
@@ -8,7 +9,7 @@
  unsigned int turnReading;
  
 void setup() {
- Serial.begin(115200);
+ Serial.begin(9600);
  timer = millis();
  lastReading = 0;
  nowReading = 0;
@@ -18,7 +19,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  if (timer - millis() >= 10 && running)
+  if ((millis() - timer >= 10) && running)
   {
     lastReading = nowReading;
     nowReading = analogRead(speedPin);
@@ -27,6 +28,7 @@ void loop() {
     Serial.print(',');
     Serial.println(turnReading);
     Serial.flush();
+    timer = millis();
   }
 
   if (Serial.available())

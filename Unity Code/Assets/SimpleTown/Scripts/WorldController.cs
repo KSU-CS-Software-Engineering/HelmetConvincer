@@ -102,7 +102,7 @@ public class WorldController : MonoBehaviour
     /// <summary>
     /// activeCam property keeps track of which camera is currently displaying.
     /// </summary>
-    public int activeCam;
+    public int activeCam = 0;
 
     /// <summary>
     /// The TurnSpeed property represents the value by which the players rotation is scaled
@@ -132,7 +132,7 @@ public class WorldController : MonoBehaviour
     /// <summary>
     /// SerialPort represents the port on which the game is currently operating
     /// </summary>
-    private SerialPort myPort = new SerialPort("", 115200);
+    private SerialPort myPort = new SerialPort("COM4", 9600);
 
     /// <summary>
     /// speedSize property represents the magnitude of the speed of the bike
@@ -176,7 +176,7 @@ public class WorldController : MonoBehaviour
 
         foreach(string portName in portNames)
         {
-            myPort = new SerialPort(portName, 115200);
+            myPort = new SerialPort(portName, 9600);
             if (myPort.IsOpen)
             {
                 myPort.ReadTimeout = 250;
