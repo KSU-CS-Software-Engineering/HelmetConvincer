@@ -132,7 +132,7 @@ public class WorldController : MonoBehaviour
     /// <summary>
     /// SerialPort represents the port on which the game is currently operating
     /// </summary>
-    private SerialPort myPort = new SerialPort("", 115200);
+    private SerialPort myPort = new SerialPort("COM4", 9600);
 
     /// <summary>
     /// speedSize property represents the magnitude of the speed of the bike
@@ -171,21 +171,22 @@ public class WorldController : MonoBehaviour
     {
         //animator = person.GetComponent<Animator>();
 
-        string[] portNames = System.IO.Ports.SerialPort.GetPortNames();
-        string ports = "";
+        //string[] portNames = System.IO.Ports.SerialPort.GetPortNames();
+        //string ports = "";
 
-        foreach(string portName in portNames)
-        {
-            myPort = new SerialPort(portName, 115200);
-            if (myPort.IsOpen)
-            {
-                myPort.ReadTimeout = 250;
-                myPort.Open();
-                break;
-            }
-        }
+        //foreach(string portName in portNames)
+        //{
+        //    myPort = new SerialPort(portName, 115200);
+        //    if (myPort.IsOpen)
+        //    {
+        //        myPort.ReadTimeout = 250;
+        //        myPort.Open();
+        //        break;
+        //    }
+        //}
 
-        speedText.text = "TIME: " + ports;
+        //speedText.text = "TIME: " + ports;
+        myPort.Open();
 
         Respawn();
     }
@@ -273,6 +274,7 @@ public class WorldController : MonoBehaviour
             if (myPort.IsOpen)
             {
                 serialIn = myPort.ReadLine();
+                Debug.Log(serialIn);
             }
         }
         catch (System.Exception e)
@@ -280,12 +282,12 @@ public class WorldController : MonoBehaviour
             serialIn = e.Message;
         }
 
-
-        string[] serialValues = serialIn.Split(',');
-        if (serialValues.Length == 2)
+        //string[] serialValues = serialIn.Split(',');
+        //if (serialValues.Length == 2)
+        if(false)
         {
-            turningMovement = System.Convert.ToSingle(serialValues[1]);
-            forwardMovement = System.Convert.ToSingle(serialValues[0]);
+            //turningMovement = System.Convert.ToSingle(serialValues[1]);
+            //forwardMovement = System.Convert.ToSingle(serialValues[0]);
 
             if (turningMovement < 10)
             {
