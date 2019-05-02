@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.Threading;
 using System.IO.Ports;
 using System.IO;
+using System;
 
 public class WorldController : MonoBehaviour
 {
@@ -181,7 +182,7 @@ public class WorldController : MonoBehaviour
         person.position = user.transform.position + new Vector3(0, 0.5f, -0.3f);
 
         /// Select the map
-        int mapSelection = Random.Range(0, 4);
+        int mapSelection = UnityEngine.Random.Range(0, 4);
         user.transform.position = mapArray[mapSelection];
 
         /// Reset values for reset
@@ -216,7 +217,7 @@ public class WorldController : MonoBehaviour
         // After 90 seconds the session ends.
         if (((Time.time - time) > 90) && (activeCam == 0))
         {
-            StartCoroutine(deathTrigger());
+            StartCoroutine(deathTrigger(0));
         }
 
 
@@ -357,39 +358,25 @@ public class WorldController : MonoBehaviour
     /// <param name="col">Col is the part of the bike that collides with a rigidbody</param>
     void OnCollisionEnter(Collision col)
     {
-        //if (col.gameObject.name.Contains("grass") || col.gameObject.name.Contains("road") || col.gameObject.name.Contains("animal"))
-        //{
-        //}
-        ///// Add damage during collision instance to damageTracker
-        //damageTracker = 100 * (transform.position - lastPosition).magnitude * Time.deltaTime;
-        //if (damageTracker >= 1)
-        //{
-        //    StartCoroutine(deathTrigger());
-        //}
-
-        ///If back wheel makes contact with rigidbody, results in death
-        if (col.Equals("Back_Wheel1"))
+        if (col.gameObject.name.Contains("grass") || col.gameObject.name.Contains("road") || col.gameObject.name.Contains("animal"))
         {
-            StartCoroutine(deathTrigger());
+            StartCoroutine(deathTrigger(forwardMovement));
         }
-        if (col.Equals("Back_Wheel"))
-        {
-            StartCoroutine(deathTrigger());
-        }
+        StartCoroutine(deathTrigger(forwardMovement));
         
     }
 
     /// <summary>
     /// DeathTrigger is a method called whenever the player has crashed and lost the game
     /// </summary>
-    IEnumerator deathTrigger()
+    IEnumerator deathTrigger(float speed)
     {
         /// Set deathCam as active camera
         animalController.BroadcastMessage("Halt");
         activeCam = 1;
         cameras[0].gameObject.SetActive(false);
         cameras[1].gameObject.SetActive(true);
-
+        
         /// Black out after 5 seconds if still on deathCam
         yield return new WaitForSeconds(1);
         if (activeCam == 1)
