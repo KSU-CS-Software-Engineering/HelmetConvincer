@@ -169,12 +169,12 @@ public class WorldController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        //animator = person.GetComponent<Animator>();
+        animator = person.GetComponent<Animator>();
 
         //string[] portNames = System.IO.Ports.SerialPort.GetPortNames();
         //string ports = "";
 
-        //foreach(string portName in portNames)
+        //foreach (string portName in portNames)
         //{
         //    myPort = new SerialPort(portName, 115200);
         //    if (myPort.IsOpen)
@@ -196,7 +196,20 @@ public class WorldController : MonoBehaviour
     /// </summary>
     void Respawn()
     {
+        Color transparent = new Color(0, 0, 0, 0);
         ///Set possible locations where the player may respawn
+        GameObject GameOverImage = GameObject.Find("GameOverImage");
+        GameObject GameOverText = GameObject.Find("GameOverText");
+        GameObject WinnerText = GameObject.Find("WinnerText");
+        GameObject WearAHelmet1 = GameObject.Find("WearAHelmet1");
+        GameObject WearAHelmet2 = GameObject.Find("WearAHelmet2");
+        GameObject WearAHelmet3 = GameObject.Find("WearAHelmet3");
+        GameOverImage.GetComponent<Image>().color = transparent;
+        GameOverText.GetComponent<Text>().color = transparent;
+        WinnerText.GetComponent<Text>().color = transparent;
+        WearAHelmet1.GetComponent<Text>().color = transparent;
+        WearAHelmet2.GetComponent<Text>().color = transparent;
+        WearAHelmet3.GetComponent<Text>().color = transparent;
         mapArray = new Vector3[4];
         mapArray[0] = new Vector3(-630, 0, 451);
         mapArray[1] = new Vector3(-469, 0, -171);
@@ -246,7 +259,7 @@ public class WorldController : MonoBehaviour
         // After 90 seconds the session ends.
         if (((Time.time - time) > 90) && (activeCam == 0))
         {
-            StartCoroutine(deathTrigger());
+            StartCoroutine(deathTrigger(1005));
         }
 
 
@@ -385,6 +398,7 @@ public class WorldController : MonoBehaviour
     /// <param name="col">Col is the part of the bike that collides with a rigidbody</param>
     void OnCollisionEnter(Collision col)
     {
+        float speed = forwardMovement;
         //if (col.gameObject.name.Contains("grass") || col.gameObject.name.Contains("road") || col.gameObject.name.Contains("animal"))
         //{
         //}
@@ -398,31 +412,55 @@ public class WorldController : MonoBehaviour
         ///If back wheel makes contact with rigidbody, results in death
         if (col.Equals("Back_Wheel1"))
         {
-            StartCoroutine(deathTrigger());
+            StartCoroutine(deathTrigger(speed));
         }
         if (col.Equals("Back_Wheel"))
         {
-            StartCoroutine(deathTrigger());
+            StartCoroutine(deathTrigger(speed));
         }
-        
+        StartCoroutine(deathTrigger(speed));
     }
 
     /// <summary>
     /// DeathTrigger is a method called whenever the player has crashed and lost the game
     /// </summary>
-    IEnumerator deathTrigger()
+    IEnumerator deathTrigger(float speed)
     {
+        Color black = new Color(0, 0, 0, 1);
+        Color background = new Color(0, 1, 1, 1);
         /// Set deathCam as active camera
         animalController.BroadcastMessage("Halt");
         activeCam = 1;
         cameras[0].gameObject.SetActive(false);
         cameras[1].gameObject.SetActive(true);
 
+        GameObject GameOverImage = GameObject.Find("GameOverImage");
+        GameObject GameOverText = GameObject.Find("GameOverText");
+        GameObject WinnerText = GameObject.Find("WinnerText");
+        GameObject WearAHelmet1 = GameObject.Find("WearAHelmet1");
+        GameObject WearAHelmet2 = GameObject.Find("WearAHelmet2");
+        GameObject WearAHelmet3 = GameObject.Find("WearAHelmet3");
+
         /// Black out after 5 seconds if still on deathCam
         yield return new WaitForSeconds(1);
-        if (activeCam == 1)
+        if(speed == 1005)
         {
-            deathScreen.color = new Color(0, 0, 0, 100);
+            GameOverImage.GetComponent<Image>().color = background;
+            WinnerText.GetComponent<Text>().color = black;
+            WearAHelmet1.GetComponent<Text>().color = black;
+        }
+        else if (speed < .15)
+        {
+            GameOverImage.GetComponent<Image>().color = background;
+            GameOverText.GetComponent<Text>().color = black;
+            WearAHelmet2.GetComponent<Text>().color = black;
+            //deathScreen.color = new Color(0,0,0, 1);
+        }
+        else
+        {
+            GameOverImage.GetComponent<Image>().color = background;
+            GameOverText.GetComponent<Text>().color = black;
+            WearAHelmet3.GetComponent<Text>().color = black;
         }
     }
     void OnApplicationQuit()
