@@ -427,7 +427,7 @@ public class WorldController : MonoBehaviour
     IEnumerator deathTrigger(float speed)
     {
         Color black = new Color(0, 0, 0, 1);
-        Color background = new Color(0, 1, 1, 1);
+        Color background = new Color(255, 0, 0, 1);
         /// Set deathCam as active camera
         animalController.BroadcastMessage("Halt");
         activeCam = 1;
